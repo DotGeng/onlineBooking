@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cqupt.onlinebooking.mapper.ClassroomMapperCustom" >
+  <sql id="query_classroom_where">
+  	<if test="classroomCustom != null">
+  		<if test="classroomCustom.classroomname != null or classroomCustom.classroomname != ''">
+  			classroomName = '${classroomCustom.classroomname}'
+  		</if>
+  	</if>
+  </sql>
+  <select id="getAllClassroom" parameterType="cn.cqupt.onlinebooking.po.ClassroomQueryVO" 
+  resultType="cn.cqupt.onlinebooking.po.ClassroomCustom">
+  	SELECT * FROM classroom 
+  	<where>
+  		<include refid="query_classroom_where"/>
+  	</where>
+  </select>
+  <insert id="addClassroom" parameterType="cn.cqupt.onlinebooking.po.ClassroomCustom">
+  	<selectKey keyProperty="classroomid" order="AFTER" resultType="java.lang.Integer">
+  		select LAST_INSERT_ID()
+  	</selectKey>
+  	INSERT INTO classroom(classroom.classroomName,classroom.maxSize) 
+  	VALUE('${classroomname}',${maxsize})
+  </insert>
+  <delete id="deleteSeatByClassroomName" parameterType="java.lang.String" >
+  	DELETE FROM seat 
+  	WHERE seat.roomID=
+  	(
+  	SELECT classroom.classroomID FROM classroom 
+  	WHERE classroom.classroomName=#{classroomName}
+  	) 
+  </delete>
+  <update id="updateClassroomByID" parameterType="cn.cqupt.onlinebooking.po.ClassroomCustom">
+  	UPDATE classroom 
+	SET
+	classroomName=#{classroomname},
+	maxSize=#{maxsize}
+	WHERE
+	classroomID=#{classroomid}
+  </update>
+  <delete id="deleteClassroomById" parameterType="java.lang.Integer">
+  	DELETE FROM classroom where classroom.classroomID=#{classroomId}
+  </delete>
+  <select id="getAllClassroomNameAndId" resultType="cn.cqupt.onlinebooking.po.ClassroomCustom">
+  	SELECT classroom.classroomID,classroom.classroomName FROM classroom
+  </select>
+  <select id="getClassroomNameByClassroomId" parameterType="map" resultType="java.lang.String">
+  	select classroom.classroomName FROM classroom WHERE classroom.classroomID = #{classroomId}
+  </select>
+</mapper>

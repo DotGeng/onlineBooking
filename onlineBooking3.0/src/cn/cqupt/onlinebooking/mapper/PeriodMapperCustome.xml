@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cqupt.onlinebooking.mapper.PeriodMapperCustome" >
+	<select id="getPeriodNameAndID" resultType="cn.cqupt.onlinebooking.po.PeriodCustome">
+		SELECT period.periodID,period.periodname FROM period
+	</select>
+	<select id="getPeriodInformation" resultType="cn.cqupt.onlinebooking.po.PeriodCustome">
+		SELECT * FROM period
+	</select>
+	<insert id="addPeriodInformation" parameterType="cn.cqupt.onlinebooking.po.PeriodCustome">
+		insert into period(period.periodID,period.periodname) 
+		VALUES(#{periodid},#{periodname})
+	</insert>
+	<delete id="deletePeriodInformation" parameterType="cn.cqupt.onlinebooking.po.PeriodCustome">
+		delete from period where period.periodID=#{periodid}	
+	</delete>
+	<select id="getExamCountByPeriodId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		SELECT count(proctor.periodID) FROM proctor WHERE proctor.periodID=#{periodId}
+	</select>
+	<select id="getCountPeriod" resultType="int">
+		SELECT count(period.periodID) FROM period 
+	</select>
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cqupt.onlinebooking.mapper.StudentMapperCustom" >
+	<sql id="query_student_where">
+		<if test="studentCustom!= null ">
+			<if test="studentCustom.studentid != null or studentCustom.studentname != 0">
+				studentID like ${studentCustom.studentid}
+			</if>
+		</if>
+	</sql>
+	<select id="findAllStudnets" parameterType="cn.cqupt.onlinebooking.po.StudnetQueryVo" 
+	resultType="cn.cqupt.onlinebooking.po.StudentCustom">
+		select * from student 
+		<where>
+			<include refid="query_student_where"/>
+		</where>
+	</select>
+	<!-- 分页得到学生的信息 -->
+	<select id="getStudentsByPaging" parameterType="map" 
+	resultType="cn.cqupt.onlinebooking.po.StudentCustom">
+		select * from student LIMIT #{pageNow},#{pageSize}
+	</select>
+	<select id="findStudentByNameAndPw" parameterType="cn.cqupt.onlinebooking.po.StudnetQueryVo"
+	resultType="cn.cqupt.onlinebooking.po.StudentCustom">
+		SELECT * from student where studentNO = '${studentCustom.studentno}' and studentPw = '${studentCustom.studentpw}'
+	</select>
+	<insert id="addStudent" parameterType="cn.cqupt.onlinebooking.po.StudentCustom" >
+  	<selectKey keyProperty="studentid" order="AFTER" resultType="java.lang.Integer">
+  		select LAST_INSERT_ID()
+  	</selectKey>
+ 	INSERT into student(
+ 	student.studentName,
+ 	student.studentNO,
+ 	student.studentPw,
+ 	student.major,
+ 	student.colledge,
+ 	student.passed,
+	student.score,
+	student.examtimes) 
+    VALUE ('${studentname}',
+    '${studentno}',
+    '${studentpw}',
+    '${major}',
+    '${colledge}',
+    ${passed},
+    ${score},
+    ${examtimes})
+ </insert>
+ <select id="selectStudentByID" parameterType="java.lang.Integer" resultType="cn.cqupt.onlinebooking.po.StudentCustom">
+ 	select  * from student 
+ 	<where>						
+		studentID = #{studentid,jdbcType=INTEGER}	
+ 	</where>
+ </select>
+ <select id="selectScorePageContent" parameterType="java.lang.Integer" resultType="cn.cqupt.onlinebooking.po.ScoreCustome" >
+ 	<!-- select * form score limit ($(param.scorePage)-1)*10,($(param.scorePage))*10;  -->
+ 	select * from score limit #{offset},#{endPage}
+ 	<!-- <where>
+ 		studentNO=#{scorePage}
+ 	</where> -->
+ 	
+ </select>
+ <select id="selectScoreByStudentNo" parameterType="java.lang.String" resultType="cn.cqupt.onlinebooking.po.ScoreCustome">
+ 	SELECT * FROM score 
+ 	<where>
+ 		score.studentNO=#{studentNo}
+ 	</where>
+ </select>
+ <update id="udpateScoreToDatabase" parameterType="cn.cqupt.onlinebooking.po.ScoreCustome" >
+ 	update score
+ 	set studentName=#{studentname},
+ 	score=#{score},
+ 	colledge=#{colledge},
+ 	major=#{major},
+ 	studClass=#{studclass},
+ 	year=#{year},
+ 	week=#{week},
+ 	day=#{day},
+ 	period=#{period},
+ 	examinationRoom=#{examinationRoom}
+ 	<where>
+ 		studentNO=#{studentno}
+ 	</where>
+ </update>
+ <select id="getScoreByYearTermAndWeek" parameterType="map" resultType="cn.cqupt.onlinebooking.po.ScoreCustome">
+ 	SELECT * from score 
+ 	where 
+ 	`year`=#{year} 
+ 	and upOrDownYear=#{upOrDownYear}
+ 	and `week`=#{week}
+ </select>
+ <select id="getScoreByYearTerm" parameterType="map" resultType="cn.cqupt.onlinebooking.po.ScoreCustome">
+ 	SELECT * from score 
+ 	<!-- where 
+ 	`year`=#{year} 
+ 	and upOrDownYear=#{upOrDownYear} -->
+ </select>
+ <update id="updateStdentPassword" parameterType="map" >
+ 	UPDATE student SET studentPw=#{password}
+ 	WHERE studentNO=#{studentNo}
+ </update>
+</mapper>

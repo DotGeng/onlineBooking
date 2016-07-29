@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cqupt.onlinebooking.mapper.ClassroombookingMapperCustom" >
+  <select id="getClassroomWithState" parameterType="map" resultType="cn.cqupt.onlinebooking.po.ClassroombookingCustom">
+  <!-- 改成左连接查询  -->
+  	SELECT classroombooking.* , teacher.teacherName 
+	FROM classroombooking left join teacher on(classroombooking.teacherID=teacher.teacherID)
+	WHERE 
+	classroombooking.roomID=#{examroomid}
+	and classroombooking.batch=#{batch}
+	 
+  </select>
+  <insert id="updateClassroomStateFromNOClassToClass" parameterType="map">
+  	INSERT 
+  		INTO 
+  		classroombooking(roomID,batch,week,periodID,state) 
+  	VALUES(#{classroomId},#{batch},#{week},#{period},#{state})
+  </insert>
+  <update id="updateClassroomStateFromClassToNoClass" parameterType="map">
+  	UPDATE classroombooking 
+	SET 
+	classroombooking.state=0,
+	classroombooking.teacherID=NULL
+	WHERE roomID=#{classroomId}
+	AND
+	classroombooking.batch=#{batch}
+	AND
+	classroombooking.`week`=#{week}
+	AND
+	classroombooking.periodID=#{period}
+  </update>
+  <update id="updateClassroomProctorID" parameterType="map">
+  	UPDATE 
+  	proctor 
+  	SET 
+  	teacherID=#{teacherId} 
+  	WHERE 
+  	examRoomID=#{classroomId} 
+  	AND 
+  	batch=#{batch} 
+  	and 
+  	`week` = #{week} 
+  	and 
+  	periodID=#{period}
+  </update>
+  <delete id="updateTestToNoClass1" parameterType="map" >
+  	DELETE FROM proctor WHERE proctor.examRoomID=#{classroomId} AND proctor.batch=#{batch} and proctor.`week`=#{week} AND proctor.periodID = #{period};
+  </delete>
+  <insert id="updateTestToNoClass2" parameterType="map">
+  	INSERT INTO classroombooking(roomID, batch, week, periodID,state ) VALUES(#{classroomId},#{batch},#{week},#{period},#{state});
+  </insert>
+  <delete id="updateNoTestToTest1" parameterType="map">
+  	DELETE from classroombooking WHERE classroombooking.roomID=#{classroomId} AND classroombooking.batch=#{batch} and classroombooking.`week`=#{week} AND classroombooking.periodID = #{period};
+	
+	
+  </delete>
+  <delete id="updateNoTestToTest2" parameterType="map">
+  	DELETE FROM proctor WHERE proctor.examRoomID=#{classroomId} AND proctor.batch=#{batch} and proctor.`week`=#{week} AND proctor.periodID = #{period};
+  </delete>
+  <insert id="updateNoTestToTest3" parameterType="map">
+  	INSERT INTO proctor(proctor.examRoomID,proctor.batch,proctor.`week`,proctor.periodID,proctor.teacherID) 
+  	VALUES(#{classroomId},#{batch},#{week},#{period},#{teacherId})
+  </insert>
+  <select id="getStudentbookingCounted" resultType="cn.cqupt.onlinebooking.po.StudentbookingCounted">
+  	SELECT count(studentbooking.studentBookingID) as countNum,examID FROM studentbooking GROUP BY examID
+  </select>
+  <select id="getClassroombookingCounts" resultType="cn.cqupt.onlinebooking.po.ClassroombookingCount">
+  	SELECT classroom.classroomID ,classroom.maxSize from classroom
+  </select>
+  <select id="ifHasReserved" parameterType="map" resultType="cn.cqupt.onlinebooking.po.ExamID">
+  	SELECT examID FROM studentbooking  WHERE studentNo=#{studentNo}
+  </select>
+  <select id="getExamTimesAndIschecked" parameterType="map" resultType="cn.cqupt.onlinebooking.po.CheckedAndExamTimes">
+  	SELECT student.examtimes,student.isCheated from student 
+  	WHERE student.studentNO=#{studentNo}
+  </select>
+</mapper>

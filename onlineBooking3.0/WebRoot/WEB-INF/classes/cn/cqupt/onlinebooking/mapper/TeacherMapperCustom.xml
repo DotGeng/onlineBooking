@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cqupt.onlinebooking.mapper.TeacherMapperCustom" >
+	<sql id="query_teacher_where">
+		<if test="teacherCustom != null">
+			<if test="teacherCustom.teachername != null or teacherCustom.teachername != '' ">
+				teacher.teacherName LIKE '%${teacherCustom.teachername}%'
+			</if>
+		</if>
+		
+	</sql>
+  <select id="findTeacherByNameAndPW" parameterType="cn.cqupt.onlinebooking.po.TeacherQueryVo" 
+			resultType="cn.cqupt.onlinebooking.po.TeacherCustom">
+				select * from teacher where teacherName = '${nameAndPW.name}' 
+				and teacherPw = '${nameAndPW.password}'
+				and teacherRole = 0;
+ </select>
+ <select id="getTeacherByNameAndPassword" parameterType="cn.cqupt.onlinebooking.po.TeacherQueryVo" 
+ resultType="cn.cqupt.onlinebooking.po.TeacherCustom">
+ 	select * from teacher where teacherName = '${nameAndPW.name}' 
+				and teacherPw = '${nameAndPW.password}'
+				and teacherRole = 1;
+ </select>
+ <select id="getProctorByName" parameterType="cn.cqupt.onlinebooking.po.TeacherQueryVo" 
+ resultType="cn.cqupt.onlinebooking.po.ProctorCustome">
+ 	SELECT proctor.*,teacher.teacherName,classroom.classroomName,period.periodname 
+		from 
+			proctor ,teacher , classroom ,period 
+		WHERE
+			proctor.teacherID=teacher.teacherID 
+		AND 
+			examRoomID=classroom.classroomID 
+		and 
+			proctor.periodID=period.periodID
+    AND 
+			proctor.teacherID 
+				= 
+				(
+				select teacher.teacherID FROM teacher WHERE teacher.teacherName=#{nameAndPW.name}
+				)
+ </select>
+ <insert id="addTeacher" parameterType="cn.cqupt.onlinebooking.po.TeacherCustom" >
+  	<selectKey keyProperty="teacherid" order="AFTER" resultType="java.lang.Integer">
+  		select LAST_INSERT_ID()
+  	</selectKey>
+ 	INSERT INTO teacher(teacher.teacherName,teacher.teacherPw,teacher.teacherRole) 
+ 	VALUE('${teachername}','${teacherpw}',${teacherrole});
+ </insert>
+ <select id="getAllTeacher" parameterType="cn.cqupt.onlinebooking.po.TeacherQueryVo" resultType="cn.cqupt.onlinebooking.po.TeacherCustom">
+ 	SELECT * from teacher 
+ 	<where>
+ 		<include refid="query_teacher_where"/>
+ 	</where>
+ </select>
+ <select id="getAllTeacherByPage" parameterType="map" resultType="cn.cqupt.onlinebooking.po.TeacherCustom">
+ 	SELECT * from teacher 
+ 	LIMIT ${pageStart},${pageEnd}
+ </select>
+ <select id="getAllTeacherCount" resultType="java.lang.Integer">
+ 	select COUNT(teacherID) from teacher  
+ </select>
+ <select id="getAllTeacherNameAndID" resultType="cn.cqupt.onlinebooking.po.TeacherCustom">
+ 	SELECT teacher.teacherID,teacher.teacherName,teacher.teacherRole from teacher WHERE teacherRole != 0
+ </select>
+ <select id="getReservedStudentCount" resultType="int">
+ 	SELECT COUNT(studentbooking.studentBookingID) from studentbooking
+ </select>
+ <update id="batchUpdateStudentScore" parameterType="map">
+ 	UPDATE student SET student.score=#{score},student.examtimes=student.examtimes+1 
+ 	WHERE studentNO=#{studentNo}
+ </update>
+</mapper>

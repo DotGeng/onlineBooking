@@ -1,0 +1,83 @@
+.table_0 {
+	border: 1px solid #C3C9CD;
+	font-size: 12px;
+}
+
+.col_l3{
+    background-color: #ffffff;
+	font-size: 12px;
+	font-weight:none;
+	border: 1px solid #C3C9CD;
+	color: #404040;
+	text-align: right;
+    padding-top: 3px;
+	height:25px;
+    font-family: Arial, Helvetica, sans-serif;  
+	border-left: 0px;
+	border-top: 0px;
+	padding-left:5px;
+	padding-right:5px;
+
+}
+
+.col_h{
+    background-color: #FAFBFD;
+	font-size: 12px;
+	font-weight:none;
+	border: 1px solid #C3C9CD;
+	color: #404040;
+	text-align: left;
+    padding-top: 3px;
+	height:25px;
+    font-family: Arial, Helvetica, sans-serif; 
+	border-right: 0px;
+	border-left: 0px;
+	border-top: 0px;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+.col_l2{
+    background-color: #DEEEFD;
+	font-size: 12px;
+	font-weight:none;
+	border: 1px solid #C3C9CD;
+	color: #404040;
+	text-align: right;
+    padding-top: 3px;
+	height:25px;
+    font-family: Arial, Helvetica, sans-serif;  
+	border-left: 0px;
+	border-top: 0px;
+	padding-left:5px;
+	padding-right:5px;
+
+}
+
+/**
+*弹出窗口专用样式
+*/
+.QueryTable,.QueryTable td { 
+	font-size:12px;  
+    border:1px solid #BEBEC9;
+    border-collapse:collapse;
+    padding:5px;
+    margin:auto;
+}
+
+.QueryTable td td {border:0px;}
+
+.FormTitle
+{
+	background: #F7FCFF;
+	color: red;
+	height: 25px;
+	text-align: center;
+}
+
+.BGColorTDLabel
+{
+	background-color: #F7FCFF;
+	width: 15%;
+	text-align: right;
+}

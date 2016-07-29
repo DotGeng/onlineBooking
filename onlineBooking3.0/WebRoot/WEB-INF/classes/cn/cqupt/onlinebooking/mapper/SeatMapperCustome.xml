@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cqupt.onlinebooking.mapper.SeatMapperCustome" >
+  <select id="findSeatByClassRoom" parameterType="java.lang.String" resultType="cn.cqupt.onlinebooking.po.SeatCustome">
+  	select seat.seatID,seatName,seatNO,classroom.classroomName from seat,classroom 
+  	WHERE roomID=(SELECT classroomID FROM classroom WHERE classroomName=#{classRoom}) 
+  	AND classroomName=#{classRoom} 
+  	ORDER BY seatNO 
+  </select>
+  <delete id="deleteSeatByClassroomName" parameterType="java.lang.String">
+  	delete FROM seat 
+  	where roomID=
+  	(
+  	SELECT classroom.classroomID 
+  	FROM classroom 
+  	where classroom.classroomName=#{classroomName}
+  	)
+  </delete>
+  <insert id="insertSeatByClassroomId" parameterType="cn.cqupt.onlinebooking.po.SeatCustome">
+  	INSERT into seat
+  	(
+  	seat.seatNO,seat.seatName,seat.roomID
+  	) 
+  	VALUES
+  	(
+  	#{seatno},#{seatname},#{roomid}
+  	)
+  </insert>
+</mapper>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cqupt.onlinebooking.mapper.StudentbookingMapper" >
+  <resultMap id="BaseResultMap" type="cn.cqupt.onlinebooking.po.Studentbooking" >
+    <id column="studentBookingID" property="studentbookingid" jdbcType="INTEGER" />
+    <result column="studentNo" property="studentno" jdbcType="VARCHAR" />
+    <result column="batch" property="batch" jdbcType="INTEGER" />
+    <result column="classroomID" property="classroomid" jdbcType="INTEGER" />
+    <result column="seatID" property="seatid" jdbcType="INTEGER" />
+    <result column="bookingTime" property="bookingtime" jdbcType="TIMESTAMP" />
+    <result column="examID" property="examid" jdbcType="INTEGER" />
+    <result column="examTime" property="examtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    studentBookingID, studentNo, batch, classroomID, seatID, bookingTime, examID, examTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.cqupt.onlinebooking.po.StudentbookingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from studentbooking
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from studentbooking
+    where studentBookingID = #{studentbookingid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from studentbooking
+    where studentBookingID = #{studentbookingid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.cqupt.onlinebooking.po.StudentbookingExample" >
+    delete from studentbooking
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.cqupt.onlinebooking.po.Studentbooking" >
+    insert into studentbooking (studentBookingID, studentNo, batch, 
+      classroomID, seatID, bookingTime, 
+      examID, examTime)
+    values (#{studentbookingid,jdbcType=INTEGER}, #{studentno,jdbcType=VARCHAR}, #{batch,jdbcType=INTEGER}, 
+      #{classroomid,jdbcType=INTEGER}, #{seatid,jdbcType=INTEGER}, #{bookingtime,jdbcType=TIMESTAMP}, 
+      #{examid,jdbcType=INTEGER}, #{examtime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cqupt.onlinebooking.po.Studentbooking" >
+    insert into studentbooking
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentbookingid != null" >
+        studentBookingID,
+      </if>
+      <if test="studentno != null" >
+        studentNo,
+      </if>
+      <if test="batch != null" >
+        batch,
+      </if>
+      <if test="classroomid != null" >
+        classroomID,
+      </if>
+      <if test="seatid != null" >
+        seatID,
+      </if>
+      <if test="bookingtime != null" >
+        bookingTime,
+      </if>
+      <if test="examid != null" >
+        examID,
+      </if>
+      <if test="examtime != null" >
+        examTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentbookingid != null" >
+        #{studentbookingid,jdbcType=INTEGER},
+      </if>
+      <if test="studentno != null" >
+        #{studentno,jdbcType=VARCHAR},
+      </if>
+      <if test="batch != null" >
+        #{batch,jdbcType=INTEGER},
+      </if>
+      <if test="classroomid != null" >
+        #{classroomid,jdbcType=INTEGER},
+      </if>
+      <if test="seatid != null" >
+        #{seatid,jdbcType=INTEGER},
+      </if>
+      <if test="bookingtime != null" >
+        #{bookingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examid != null" >
+        #{examid,jdbcType=INTEGER},
+      </if>
+      <if test="examtime != null" >
+        #{examtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.cqupt.onlinebooking.po.StudentbookingExample" resultType="java.lang.Integer" >
+    select count(*) from studentbooking
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update studentbooking
+    <set >
+      <if test="record.studentbookingid != null" >
+        studentBookingID = #{record.studentbookingid,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentno != null" >
+        studentNo = #{record.studentno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batch != null" >
+        batch = #{record.batch,jdbcType=INTEGER},
+      </if>
+      <if test="record.classroomid != null" >
+        classroomID = #{record.classroomid,jdbcType=INTEGER},
+      </if>
+      <if test="record.seatid != null" >
+        seatID = #{record.seatid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookingtime != null" >
+        bookingTime = #{record.bookingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examid != null" >
+        examID = #{record.examid,jdbcType=INTEGER},
+      </if>
+      <if test="record.examtime != null" >
+        examTime = #{record.examtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update studentbooking
+    set studentBookingID = #{record.studentbookingid,jdbcType=INTEGER},
+      studentNo = #{record.studentno,jdbcType=VARCHAR},
+      batch = #{record.batch,jdbcType=INTEGER},
+      classroomID = #{record.classroomid,jdbcType=INTEGER},
+      seatID = #{record.seatid,jdbcType=INTEGER},
+      bookingTime = #{record.bookingtime,jdbcType=TIMESTAMP},
+      examID = #{record.examid,jdbcType=INTEGER},
+      examTime = #{record.examtime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cqupt.onlinebooking.po.Studentbooking" >
+    update studentbooking
+    <set >
+      <if test="studentno != null" >
+        studentNo = #{studentno,jdbcType=VARCHAR},
+      </if>
+      <if test="batch != null" >
+        batch = #{batch,jdbcType=INTEGER},
+      </if>
+      <if test="classroomid != null" >
+        classroomID = #{classroomid,jdbcType=INTEGER},
+      </if>
+      <if test="seatid != null" >
+        seatID = #{seatid,jdbcType=INTEGER},
+      </if>
+      <if test="bookingtime != null" >
+        bookingTime = #{bookingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examid != null" >
+        examID = #{examid,jdbcType=INTEGER},
+      </if>
+      <if test="examtime != null" >
+        examTime = #{examtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where studentBookingID = #{studentbookingid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cqupt.onlinebooking.po.Studentbooking" >
+    update studentbooking
+    set studentNo = #{studentno,jdbcType=VARCHAR},
+      batch = #{batch,jdbcType=INTEGER},
+      classroomID = #{classroomid,jdbcType=INTEGER},
+      seatID = #{seatid,jdbcType=INTEGER},
+      bookingTime = #{bookingtime,jdbcType=TIMESTAMP},
+      examID = #{examid,jdbcType=INTEGER},
+      examTime = #{examtime,jdbcType=VARCHAR}
+    where studentBookingID = #{studentbookingid,jdbcType=INTEGER}
+  </update>
+</mapper>

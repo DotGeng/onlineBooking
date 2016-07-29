@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cqupt.onlinebooking.mapper.SystemdataMapper" >
+  <resultMap id="BaseResultMap" type="cn.cqupt.onlinebooking.po.Systemdata" >
+    <id column="systemDataID" property="systemdataid" jdbcType="INTEGER" />
+    <result column="systemDataName" property="systemdataname" jdbcType="VARCHAR" />
+    <result column="systemDataContent" property="systemdatacontent" jdbcType="VARCHAR" />
+    <result column="dateTime" property="datetime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    systemDataID, systemDataName, systemDataContent, dateTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.cqupt.onlinebooking.po.SystemdataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from systemdata
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from systemdata
+    where systemDataID = #{systemdataid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from systemdata
+    where systemDataID = #{systemdataid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.cqupt.onlinebooking.po.SystemdataExample" >
+    delete from systemdata
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.cqupt.onlinebooking.po.Systemdata" >
+    insert into systemdata (systemDataID, systemDataName, systemDataContent, 
+      dateTime)
+    values (#{systemdataid,jdbcType=INTEGER}, #{systemdataname,jdbcType=VARCHAR}, #{systemdatacontent,jdbcType=VARCHAR}, 
+      #{datetime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cqupt.onlinebooking.po.Systemdata" >
+    insert into systemdata
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="systemdataid != null" >
+        systemDataID,
+      </if>
+      <if test="systemdataname != null" >
+        systemDataName,
+      </if>
+      <if test="systemdatacontent != null" >
+        systemDataContent,
+      </if>
+      <if test="datetime != null" >
+        dateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="systemdataid != null" >
+        #{systemdataid,jdbcType=INTEGER},
+      </if>
+      <if test="systemdataname != null" >
+        #{systemdataname,jdbcType=VARCHAR},
+      </if>
+      <if test="systemdatacontent != null" >
+        #{systemdatacontent,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.cqupt.onlinebooking.po.SystemdataExample" resultType="java.lang.Integer" >
+    select count(*) from systemdata
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update systemdata
+    <set >
+      <if test="record.systemdataid != null" >
+        systemDataID = #{record.systemdataid,jdbcType=INTEGER},
+      </if>
+      <if test="record.systemdataname != null" >
+        systemDataName = #{record.systemdataname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemdatacontent != null" >
+        systemDataContent = #{record.systemdatacontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datetime != null" >
+        dateTime = #{record.datetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update systemdata
+    set systemDataID = #{record.systemdataid,jdbcType=INTEGER},
+      systemDataName = #{record.systemdataname,jdbcType=VARCHAR},
+      systemDataContent = #{record.systemdatacontent,jdbcType=VARCHAR},
+      dateTime = #{record.datetime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cqupt.onlinebooking.po.Systemdata" >
+    update systemdata
+    <set >
+      <if test="systemdataname != null" >
+        systemDataName = #{systemdataname,jdbcType=VARCHAR},
+      </if>
+      <if test="systemdatacontent != null" >
+        systemDataContent = #{systemdatacontent,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        dateTime = #{datetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where systemDataID = #{systemdataid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cqupt.onlinebooking.po.Systemdata" >
+    update systemdata
+    set systemDataName = #{systemdataname,jdbcType=VARCHAR},
+      systemDataContent = #{systemdatacontent,jdbcType=VARCHAR},
+      dateTime = #{datetime,jdbcType=VARCHAR}
+    where systemDataID = #{systemdataid,jdbcType=INTEGER}
+  </update>
+</mapper>

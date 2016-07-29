@@ -1,0 +1,42 @@
+@charset "utf-8";
+/******公用******/
+body { color:#505050; }
+a { color:#505050; }
+a:hover { color:#0070B7; }
+.public_color, a.public_color, a:hover.public_color { color:#3974CB; }
+.public_color1 { color:#08598C; }
+.public_color2 { color:#FF4200; }
+.public_color3, a.public_color3, .public_color_size { color:#FF0000; }
+.public_color_size { font-size:14px; }
+.public_color4, a.public_color4 { color:#0D9443; }
+a:hover.public_color4 { color:#0D9443; }
+.public_color5, a.public_color5 { color:#0070B7; }
+.public_color6 { color:#009900; }
+.public_color7 { font-size:14px; text-align:left; padding:10px 0px 3px 15px; color:#505050; }
+.public_color8 { font-size:12px; text-align:left; color:#3974cb; padding:3px 0px 10px 0px; }
+.public_color8 a { font-size:12px; text-align:left; color:#3974cb; padding:0px 15px; }
+.public_color8 a:hover { font-size:12px; text-align:left; color:#3974cb; }
+a:hover.public_color3 { color:#FF0000; text-decoration:underline; }
+a:hover.public_color5 { color:#0070B7; text-decoration:underline; }
+.head, .index_tab, .index_tab_top, .index_tab_list, .index_sort, .index_mat_list, .index_ssxc_list, .login_wrap, .main_tap_top, .main_focus_top, .event_con, .main_tab, .main_tab1, .event_sen, .event_sen_right_tip, .main_focus_bot, .main_focus1, .hot_right li, .hot_con, .hot_wrap, .page, .snapshot_date, .figure_info, .figure_info_top, .figure_mat, .main_tab_all, .index_table, .record_note_tip { overflow:hidden; *display:inline-block;
+}
+.index_imgshow { display:none; }
+.top, .head, .menu, .index_tab_wrap, .index_mat, .index_imgshow, .login, .main_tab, .batch_del, .keyword_table, .main_wrap, .middle, .main_focus, .event_mat, .main_focus1, .hot, .snapshot_date, .snapshot_mat, .figure,.page { width:1000px; margin:0px auto; }
+.public_input, .public_input1, .public_input2, .public_input3, .public_input4, .public_input5, .public_input6, .public_input7, .public_input8 { height:23px; background:url(../images/input_bg.gif) repeat-x left top; border:1px solid #D7DFE4; vertical-align:middle; line-height:23px; padding:0px 0px 0px 3px; width:149px; }
+.public_button, .public_button_hover { background:url(../images/take_input1.gif) no-repeat; width:65px; height:25px; line-height:25px; text-align:center; color:#343233; border:0px; cursor:pointer; vertical-align:middle; }
+
+/**
+*登录页面样式
+*/
+.login_con { height:300px; background:url(../images/login_bg.jpg) no-repeat left top; padding:0px 0px 60px 0px; }
+.login_cons, .login_cons1 { float:right; background:url(../images/login_bg1.jpg) no-repeat; width:307px; height:300px; }
+.login_cons1 { background:url(../images/login_bg2.jpg) no-repeat; }
+.login_title { font-size:14px; color:#000; padding:16px 0px 0px 40px; }
+.login_list { padding:44px 0px 0px 85px; }
+.login_list li { padding:0px 0px 22px 0px; }
+.login_but { text-align:center; padding:10px 25px 0px 0px; }
+.login_but input { background:url(../images/login_but.gif) no-repeat; width:200px; height:37px; border:0px; cursor:pointer; }
+
+/******底部*******/
+.foot_mat { background:url(../images/foot.gif) repeat-x left top; height:72px; }
+.foot { text-align:center; text-align:center; line-height:24px; padding:14px 0px 0px 0px; }

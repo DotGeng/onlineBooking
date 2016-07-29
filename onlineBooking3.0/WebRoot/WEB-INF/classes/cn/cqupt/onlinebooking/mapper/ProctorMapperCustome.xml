@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cqupt.onlinebooking.mapper.ProctorMapperCustome" >
+	<select id="getProctorList" resultType="cn.cqupt.onlinebooking.po.ProctorCustome">
+		SELECT proctor.*,teacher.teacherName,classroom.classroomName,period.periodname 
+		from 
+			proctor ,teacher , classroom ,period 
+		WHERE
+			proctor.teacherID=teacher.teacherID 
+		AND 
+			examRoomID=classroom.classroomID 
+		and 
+			proctor.periodID=period.periodID
+		
+	</select>
+	<insert id="insertProctorAndExamToDB" parameterType="cn.cqupt.onlinebooking.po.ProctorCustome">
+		INSERT INTO 
+		proctor
+		(
+		batch,
+		proctor.examRoomID,
+		proctor.ifFinished,
+		proctor.teacherID,
+		proctor.periodID,
+		proctor.upOrDownYear,
+		proctor.`week`,
+		proctor.`year`
+		) 
+		VALUES
+		(
+		${batch},
+		${examroomid},
+		${ifFinished},
+		${teacherid},
+		${periodid},
+		${upOrDownYear},
+		${week},
+		${year}
+		)
+	</insert>
+	<select id="getProctorByExamId" parameterType="java.lang.Integer" resultType="cn.cqupt.onlinebooking.po.ProctorCustome">
+		SELECT proctor.*,teacher.teacherName,classroom.classroomName,period.periodname 
+		from 
+			proctor ,teacher , classroom ,period 
+		WHERE
+			proctor.teacherID=teacher.teacherID 
+		AND 
+			examRoomID=classroom.classroomID 
+		and 
+			proctor.periodID=period.periodID
+		and 
+			proctor.examID=#{examID}
+	</select>
+	<update id="updateProctorByExamId" parameterType="cn.cqupt.onlinebooking.po.ProctorCustome">
+		UPDATE proctor 
+		SET
+		proctor.teacherID=#{teacherid},proctor.examRoomID=#{examroomid},
+		proctor.periodID=#{periodid},
+		proctor.batch=#{batch},proctor.ifFinished=#{ifFinished},proctor.upOrDownYear=#{upOrDownYear},
+		proctor.`week`=#{week},proctor.`year`=#{year}
+		WHERE
+		proctor.examID=#{examid}
+	</update>
+	<delete id="deleteProctorByExamID" parameterType="java.lang.Integer">
+		DELETE FROM proctor WHERE proctor.examID=#{examID} 
+	</delete>
+	<select id="getExamInformationNotRepeat" resultType="cn.cqupt.onlinebooking.po.ProctorCustome">
+		   	select proctor.*,classroom.classroomName,period.periodname from proctor,classroom,period where proctor.examID 
+		   	in 
+		   	(select examID from (select Max(proctor.examID) as examID from proctor group by proctor.examRoomID,proctor.periodID,proctor.upOrDownYear,proctor.`week`,proctor.`year`) as t) 
+		   	AND proctor.examRoomID=classroom.classroomID
+			AND proctor.periodID=period.periodID
+			AND proctor.ifFinished=0
+			AND classroom.maxSize
+			>
+			(SELECT COUNT(studentbooking.studentBookingID) FROM studentbooking where proctor.examID=studentbooking.examID)
+	</select>
+	<select id="getExamID" parameterType="map" resultType="int">
+		SELECT 
+		proctor.examID 
+		FROM 
+		proctor 
+		WHERE 
+		proctor.examRoomID = #{examroomId}
+		AND 
+		batch = #{batch}
+		and 
+		`week` = #{week}
+		and 
+		periodID = #{period}
+	</select>
+</mapper>

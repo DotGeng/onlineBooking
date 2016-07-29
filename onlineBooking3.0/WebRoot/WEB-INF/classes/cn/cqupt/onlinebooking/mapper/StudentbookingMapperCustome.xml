@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cqupt.onlinebooking.mapper.StudentbookingMapperCustome" >
+  <insert id="addStudentBookingInformation" parameterType="map">
+  	<selectKey keyProperty="studentBookingID" order="AFTER" resultType="java.lang.Integer">
+  		select LAST_INSERT_ID()
+  	</selectKey>
+  	insert INTO 
+  	studentbooking(studentbooking.classroomID,studentbooking.examID,studentbooking.studentNo,studentbooking.seatID) 
+	VALUES(#{classroomId},#{examId},#{studentNo},#{seatID})
+  </insert>
+  <select id="getSeatsNotUsed" parameterType="java.lang.Integer" resultType="cn.cqupt.onlinebooking.po.SeatCustome">
+  	SELECT 
+  	seat.seatID 
+  	FROM 
+  	seat 
+  	WHERE 
+  	seat.seatID 
+  	NOT in 
+  		(SELECT 
+  			seatID 
+  		FROM 
+  			studentbooking 
+  		WHERE 
+  			classroomID=#{classroomId}
+  		) 
+  </select>
+  <select id="getifCountStudentBookingAndFinished" parameterType="map" resultType="java.lang.Integer">
+  	SELECT 
+  		COUNT(studentbooking.studentBookingID) 
+  	from 
+  		studentbooking,proctor 
+  	WHERE 
+  		studentbooking.studentNo=#{studentNo}
+  	and 
+  		proctor.examID=studentBooking.examID 
+  	AND 
+  		proctor.ifFinished=0
+  </select>
+  <select id="getStudeentBookingByProctorInformation" parameterType="cn.cqupt.onlinebooking.po.ProctorCustome" resultType="cn.cqupt.onlinebooking.po.StudentbookingCustome">
+  	<!-- SELECT studentbooking.studentBookingID, studentbooking.studentNo,student.studentName,seat.seatName
+	from 
+	studentbooking,student,period,seat WHERE 
+	studentbooking.examID = #{examid} 
+	and studentbooking.studentNo=student.studentNO
+	and studentbooking.seatID=seat.seatID -->
+	SELECT studentbooking.studentBookingID, studentbooking.studentNo,student.studentName,student.studClass,seat.seatName
+	from 
+	studentbooking LEFT JOIN student ON(studentbooking.studentNo=student.studentNO) LEFT JOIN seat ON( studentbooking.seatID=seat.seatID)
+	WHERE studentbooking.examID = #{examid} 
+	 
+	<!-- (
+		SELECT 
+			proctor.examID 
+		from 
+			proctor 
+		where proctor.teacherID=#{teacherid}
+		AND proctor.examRoomID=#{examroomid}
+		and proctor.batch=#{batch} 
+		AND proctor.periodID=#{periodid} 
+		AND proctor.`year`=#{year}
+		AND proctor.upOrDownYear=#{upOrDownYear} 
+		AND proctor.ifFinished=0
+	) -->
+	
+  </select>
+  <!-- <delete id="deleteStudentBookingById" parameterType="java.lang.Integer" >
+  	DELETE 
+  	from
+    studentbooking 
+    WHERE 
+    studentbooking.studentBookingID=#{studentBookingId}
+  </delete> -->
+</mapper>
