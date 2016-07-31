@@ -52,11 +52,11 @@
 							<td width="220px" class="tdColor">系(专业)</td>
 							<td width="220px" class="tdColor">班(年级)</td>
 							<td width="220px" class="tdColor">学年</td>
-							<td width="220px" class="tdColor">学期（上半年，下半年）</td>
+							<!-- <td width="220px" class="tdColor">学期（上半年，下半年）</td> -->
 							<td width="220px" class="tdColor">考试周次</td>
 							<td width="220px" class="tdColor">考试日期</td>
 							<td width="220px" class="tdColor">考试场次</td>
-							<td width="220px" class="tdColor">考场</td>
+							<td width="220px" class="tdColor">是否通过</td> 
 							<td width="220px" class="tdColor">成绩</td>
 							<td width="220px" class="tdColor">考试次数</td>
 							<!-- <td width="220px" class="tdColor">操作</td> -->
@@ -72,11 +72,13 @@
 							<td>${score.major }</td>
 							<td>${score.studclass }</td>
 							<td>${score.year }</td>
-							<td>${score.upOrDownYear }</td>
+							<%-- <td>${score.upOrDownYear }</td> --%>
 							<td>${score.week }</td>
 							<td>${score.day }</td>
 							<td>${score.period }</td>
-							<td>${score.examinationRoom }</td>
+							<td><c:if test="${ score.score >= 60}"> 是 </c:if>
+								<c:if test="${ score.score < 60}"> 否 </c:if>
+							</td>
 							<td>${score.score }</td> 
 							<td>${score.examtimes }</td>
 							<%-- <td><a href="<%=path %>/modifyScorePage.action?studentNo=${score.studentno }"><img class="operation"

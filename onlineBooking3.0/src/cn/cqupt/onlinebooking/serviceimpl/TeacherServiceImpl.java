@@ -96,5 +96,11 @@ public class TeacherServiceImpl implements TeacherService{
 	public Integer getAllTeacherCount() throws Exception {
 		return teaherMapperCustom.getAllTeacherCount();
 	}
+	public void deleteStudentInformation() throws Exception {
+		systemdataMapperCustom.deleteStudentInformation();
+	}
+	public Integer getStudentBookingByExamId(Integer examID) throws Exception {
+		return proctorMapperCustome.getStudentBookingByExamId(examID);
+	}
 
 }

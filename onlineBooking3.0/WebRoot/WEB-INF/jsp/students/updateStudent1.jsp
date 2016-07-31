@@ -1,17 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+request.setCharacterEncoding("utf8");
+response.setCharacterEncoding("utf8");
+%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
-<%String path = request.getContextPath() ; %>
-<!DOCTYPE html >
-<html >
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
-<link rel="stylesheet" type="text/css" href="<%=path %>/style/css/css.css" />
+<!DOCTYPE HTML >
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'updateStudent.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="<%=path %>/style/css/css.css" />
 <script type="text/javascript" src="<%=path %>/style/js/jquery.min.js"></script>
-</head>
-<body>
+
+  </head>
+  
+  <body>
 
 	<div id="pageAll">
 		<div class="pageTop">
@@ -37,7 +53,7 @@
 							<input class="file1" type="file" />
 						</div>
 					</div> --%>
-					<form action="<%=path %>/udpateStudentToDatabase.action" method="post">
+					<form action="<%=path %>/udpateStudentToDatabase.action">
 					<input type="hidden" name="studentid" value="${student.studentid }" />
 						<div class="bbD">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学生名字：<%-- <input value="${student.studentname }" name="studentname" 

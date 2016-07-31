@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<tr>
 	  		<td width="200" height="50"></td>
 	  		<td>
-	  		<form action="addToDBAboutClassroomState.action">
+	  		<form action="<%=path %>/addToDBAboutClassroomState.action">
 	  			<input type="radio" name="wantTostate" checked="checked" value="1">指定预约
 	  			<select name="teacherid">
 	  				<c:forEach items="${teacherCustomeList }" var="teacher">

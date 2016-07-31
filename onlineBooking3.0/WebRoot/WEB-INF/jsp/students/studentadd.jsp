@@ -26,7 +26,6 @@
 			<input type="hidden" name="success" value="${success}"  id="success"/>
 			<div class="banneradd bor">
 				<div class="baTopNo">
-					<a class="addA" href="banneradd.html">导出&nbsp;&nbsp;+</a>
 				</div>
 				<div class="baBody">
 					<%-- <div class="bbD">
@@ -37,7 +36,7 @@
 							<input class="file1" type="file" />
 						</div>
 					</div> --%>
-					<form action="<%=path %>/addStudent.action">
+					<form action="<%=path %>/addStudent.action" method="post" >
 						<div class="bbD">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学生名字：<input name="studentname" type="text"
 								class="input3" required="required"/>
@@ -89,7 +88,7 @@
 						<div class="bbD">
 							<p class="bbDP">
 								<button type="submit" class="btn_ok btn_yes">提交</button>
-								<a class="btn_ok btn_no" href="#">取消</a>
+								<!-- <a class="btn_ok btn_no" href="#">取消</a> -->
 							</p>
 						</div>
 					</form>

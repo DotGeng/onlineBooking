@@ -37,6 +37,24 @@ public class TeacherController {
 	private PeriodService periodService;
 	@Autowired
 	private StudentService studentService;
+	public static int openBatch = 0;
+	//跳转到指定预约周次界面
+	@RequestMapping("changeOpenBatchPage")
+	public ModelAndView changeOpenBatchPage() throws Exception {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("openBatch",openBatch);
+		modelAndView.setViewName("teacher/changeOpenBatchPage");
+		return modelAndView;
+	}
+	// 指定预约周次
+	@RequestMapping("changeOpenBatch")
+	public ModelAndView changeOpenBatch(Integer openBatch) throws Exception {
+		ModelAndView modelAndView = new ModelAndView();
+		TeacherController.openBatch = openBatch;
+		modelAndView.addObject("openBatch",openBatch);
+		modelAndView.setViewName("teacher/changeOpenBatchPage");
+		return modelAndView;
+	}
 	//管理员登录
 		@RequestMapping("managerLogin")
 		public ModelAndView getManagerByNameAndPW(TeacherQueryVo qu,String checkCode,HttpSession session) throws Exception {
@@ -430,5 +448,23 @@ public class TeacherController {
 		@RequestMapping("uploadTeacher")
 		public String editUploadTeacherPage() throws Exception {
 			return "teacher/uploadTeacher";
+		}
+		//清空学生预约信息
+		@RequestMapping("clearUpStudentBooking")
+		public ModelAndView clearUpStudentBooking() throws Exception {
+			ModelAndView modelAndView = new ModelAndView();
+			classroomServcie.clearUpStudentBooking();
+			modelAndView.addObject("message1","预约信息清空成功");
+			modelAndView.setViewName("teacher/manageData");
+			return modelAndView;
+		}
+		//清空学生信息
+		@RequestMapping("clearUpStudentInformation")
+		public ModelAndView clearUpStudentInformation() throws Exception {
+			ModelAndView modelAndView = new ModelAndView();
+			teacherService.deleteStudentInformation();
+			modelAndView.addObject("message2","学生相关信息清除成功");
+			modelAndView.setViewName("teacher/manageData");
+			return modelAndView;
 		}
 }

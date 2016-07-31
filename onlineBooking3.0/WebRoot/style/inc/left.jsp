@@ -128,7 +128,21 @@
 						src="../img/coin21.png" />
 				</dd>
 			</dl>
-			<!--<dl class="system_log">
+			<dl class="system_log">
+				<dt>
+					<img class="icon1" src="../img/coinL1.png" /><img class="icon2"
+						src="../img/coinL2.png" /> 预约周次<img class="icon3"
+						src="../img/coin19.png" /><img class="icon4"
+						src="../img/coin20.png" />
+				</dt>
+				<dd>
+					<img class="coin11" src="../img/coin111.png" /><img class="coin22"
+						src="../img/coin222.png" /><a href="<%=path %>/changeOpenBatchPage.action"
+						target="main" class="cks">周次设置</a><img class="icon5"
+						src="../img/coin21.png" />
+				</dd> 
+			</dl>
+			<!-- <dl class="system_log">
 				<dt>
 					<img class="icon1" src="../img/coinL1.png" /><img class="icon2"
 						src="../img/coinL2.png" /> 系统管理<img class="icon3"
@@ -146,7 +160,8 @@
 						src="../img/coin222.png" /><a class="cks">退出</a><img
 						class="icon5" src="../img/coin21.png" />
 				</dd>
-			</dl> -->
+			</dl>  -->
+			
 		</div>
 
 	</div>

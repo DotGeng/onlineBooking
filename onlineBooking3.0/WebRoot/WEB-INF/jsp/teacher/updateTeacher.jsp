@@ -38,7 +38,7 @@
 							<input class="file1" type="file" />
 						</div>
 					</div> --%>
-					<form action="<%=path %>/updateTeacherToDatabase.action">
+					<form action="<%=path %>/updateTeacherToDatabase.action" method="post">
 					<input type="hidden" name="teacherid" value="${teacher.teacherid }" />
 						<div class="bbD">
 							

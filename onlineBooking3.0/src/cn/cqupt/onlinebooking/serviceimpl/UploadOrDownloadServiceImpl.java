@@ -113,6 +113,9 @@ public class UploadOrDownloadServiceImpl implements UploadOrDowLoadService{
 	            	}
 	            	
 	            }
+	            if(studentCustom.getStudentpw().equals(null) || studentCustom.getStudentpw().equals("")) {
+	            	studentCustom.setStudentpw(studentCustom.getStudentno());
+	            }
 	            //teacherCustom.setTeacherrole(1);
 	            studentMapperCustom.addStudent(studentCustom);
             	if(studentCustom.getStudentid() == null) {

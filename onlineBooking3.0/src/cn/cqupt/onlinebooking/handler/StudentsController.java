@@ -71,7 +71,7 @@ public class StudentsController {
 			modelAndView.addObject("examId",ExamIDPO.getExamID());
 		}
 		if(studentCustom != null) {
-			List<ProctorCustome> proctorCustomeList = classroomServcie.getExamInformationNotRepeat();
+			List<ProctorCustome> proctorCustomeList = classroomServcie.getExamInformationNotRepeat(TeacherController.openBatch);
 			modelAndView.addObject("studentCustom", studentCustom);
 			modelAndView.addObject("proctorCustomeList",proctorCustomeList);
 			Integer count = studentService.getifCountStudentBookingAndFinished(studentCustom.getStudentno());
@@ -110,18 +110,12 @@ public class StudentsController {
 			modelAndView.addObject("examId",ExamIDPO.getExamID());
 		}
 		if(studentCustom != null) {
-			List<ProctorCustome> proctorCustomeList = classroomServcie.getExamInformationNotRepeat();
+			List<ProctorCustome> proctorCustomeList = classroomServcie.getExamInformationNotRepeat(TeacherController.openBatch);
 			modelAndView.addObject("studentCustom", studentCustom);
 			modelAndView.addObject("proctorCustomeList",proctorCustomeList);
-			//Integer count = studentService.getifCountStudentBookingAndFinished(studentCustom.getStudentno());
-			/*if(count > 0) {
-				modelAndView.setViewName("students/hasFinishedBooking");
-				return modelAndView;
-			}*/
 			//得到通知
 			List<SystemDataCustom> systemDataCustomList = teacherService.getAllSystemData();
 			modelAndView.addObject("systemDataCustomList",systemDataCustomList);
-			//modelAndView.setViewName("students/studentLoginSuccess");
 			modelAndView.setViewName("students/studentLoginSuccess");
 			return modelAndView;
 		}else {
@@ -212,8 +206,8 @@ public class StudentsController {
 		return modelAndView;
 	}
 	@RequestMapping("udpateStudentToDatabase")
-	public ModelAndView updataStudentToDatabase(StudentCustom studentCustom) throws Exception {
-		/*int i = */ studentService.updateStudent(studentCustom.getStudentid(), studentCustom);
+	public ModelAndView updataStudentToDatabase(StudentCustom studentCustom,String studentname) throws Exception {
+		studentService.updateStudent(studentCustom.getStudentid(), studentCustom);
 		/*StudentsController studentController = new StudentsController();
 		return studentController.getAllStudents(null);*/
 		ModelAndView modelAndView = new ModelAndView();
@@ -304,8 +298,8 @@ public class StudentsController {
 		}
 		//得到学生的考试次数和作弊情况
 		CheckedAndExamTimes checkedAndExamTimes = studentService.getExamTimesAndIschecked(studentNo);
-		if(checkedAndExamTimes.getExamTimes() >= 3) {
-			modelAndView.addObject("information","您考试次数超过三次，已不能再次参加考试");
+		if(checkedAndExamTimes.getExamTimes() >= 2) {
+			modelAndView.addObject("information","您考试次数最多是两次，已不能再次参加考试");
 			modelAndView.setViewName("students/hasReserved");
 			return modelAndView;
 		}
@@ -324,7 +318,7 @@ public class StudentsController {
 				}else {
 					modelAndView.addObject("examId",examIDPOTmp.getExamID());
 				}
-				List<ProctorCustome> proctorCustomeList = classroomServcie.getExamInformationNotRepeat();
+				List<ProctorCustome> proctorCustomeList = classroomServcie.getExamInformationNotRepeat(TeacherController.openBatch);
 				modelAndView.addObject("proctorCustomeList",proctorCustomeList);
 				modelAndView.setViewName("students/studentLoginSuccess");
 				return modelAndView;

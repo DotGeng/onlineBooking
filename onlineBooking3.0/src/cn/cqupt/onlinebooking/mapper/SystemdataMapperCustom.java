@@ -11,4 +11,7 @@ public interface SystemdataMapperCustom extends SystemdataMapper {
 	public List<SystemDataCustom> getAllSystemData() throws Exception;
 	/*//按照id删除通知信息
 	public void deleteNotifyById(@Param("systemdataId")Integer systemdataId) throws Exception;*/
+	//清空学生信息
+	public void deleteStudentInformation() throws Exception;
+	
 }

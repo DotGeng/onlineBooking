@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href="<%=path %>/style/css/css.css" />
 <script type="text/javascript" src="<%=path %>/style/js/jquery.min.js"></script>
 </head>
-
 <body>
 	<div id="pageAll">
 		<div class="pageTop">

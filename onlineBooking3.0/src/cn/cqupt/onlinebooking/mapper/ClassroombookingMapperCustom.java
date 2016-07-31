@@ -33,5 +33,7 @@ public interface ClassroombookingMapperCustom extends ClassroombookingMapper{
 	//验证该学生是否预约过
 	public ExamID ifHasReserved(@Param("studentNo")String studentNo) throws Exception;
 	public CheckedAndExamTimes getExamTimesAndIschecked(@Param("studentNo")String studentNo) throws Exception;
+	//清空预约信息
+	public void clearUpStudentBooking() throws Exception;
 	
 }

@@ -44,5 +44,8 @@ public interface TeacherService {
 	public void deleteNotifyById(Integer systemdataId) throws Exception;
 	//添加通知信息
 	public void addNotifyInformation(String systemdataname,String systemdatacontent) throws Exception;
-	
+	//删除学生信息
+	public void deleteStudentInformation() throws Exception; 
+	//根据examID查看是否该考试下还有预约的信息
+	public Integer getStudentBookingByExamId(Integer examID) throws Exception;
 }

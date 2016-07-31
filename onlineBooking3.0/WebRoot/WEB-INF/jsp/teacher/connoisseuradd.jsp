@@ -38,7 +38,7 @@
 							<input class="file1" type="file" />
 						</div>
 					</div> --%>
-					<form action="<%=path %>/addTeacher.action">
+					<form action="<%=path %>/addTeacher.action" method="post">
 						<div class="bbD">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教师名字：<input name="teachername" type="text"
 								class="input3" required="required"/>

@@ -40,7 +40,7 @@ public interface ClassroomService {
 	//根据id删除监考员信息和考试信息
 	public void deleteProctorByExamID(Integer examID) throws Exception;
 	//查出所有的不重复的考试信息
-	public List<ProctorCustome> getExamInformationNotRepeat() throws Exception;
+	public List<ProctorCustome> getExamInformationNotRepeat(Integer openBatch) throws Exception;
 	//得到所有的没有分配的座位
 	public List<SeatCustome> getSeatsNotUsed(Integer classroomId) throws Exception;
 	//根据机房的名字和考试周次获得该周的机房使用情况
@@ -53,5 +53,6 @@ public interface ClassroomService {
 	public List<StudentbookingCounted> getStudentbookingCounted() throws Exception;
 	//得到每个机房的可预约数
 	public List<ClassroombookingCount> getClassroombookingCounts() throws Exception;
-	
+	//清空学生预约信息
+	public void clearUpStudentBooking() throws Exception ;
 }

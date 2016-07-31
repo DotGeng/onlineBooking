@@ -37,30 +37,30 @@
 							<input class="file1" type="file" />
 						</div>
 					</div> --%>
-					<form action="<%=path %>/udpateStudentToDatabase.action" method="post">
+					<form action="<%=path %>/udpateStudentToDatabase.action">
 					<input type="hidden" name="studentid" value="${student.studentid }" />
 						<div class="bbD">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学生名字：<%-- <input value="${student.studentname }" name="studentname" 
-								class="input3" required="required"/> --%>
-								<input value="${student.studentname }" name="studentname" >
+							
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学生名字：<input value="${student.studentname }" name="studentname" type="text"
+								class="input3" required="required"/>
 						</div>
 						<div class="bbD">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学生学号：<input value="${student.studentno}" name="studentno" 
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学生学号：<input value="${student.studentno}" name="studentno" type="text"
 								class="input3" required="required" readonly="readonly"/>
 						</div>
 						<div class="bbD">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<input value="${student.studentpw} " name="studentpw" 
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<input value="${student.studentpw} " name="studentpw" type="text"
 							class="input3" required="required"/>
 							<!-- <select name="teacherrole" class="input3" >
 								<option value="1">普通管理员</option>
 							</select> -->
 						</div>
 						<div class="bbD">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：<input value="${student.major}" name="major" 
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：<input value="${student.major}" name="major" type="text"
 								class="input3" required="required"/>
 						</div>
 						<div class="bbD">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所在学院：<input value="${student.colledge}" name="colledge" 
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所在学院：<input value="${student.colledge}" name="colledge" type="text"
 								class="input3" required="required"/>
 						</div>
 						<div class="bbD">
@@ -79,7 +79,7 @@
 						</div> 
 			
 						<div class="bbD">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数：<input value="${student.score}" name="score" 
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数：<input value="${student.score}" name="score" type="text"
 								class="input3" required="required"/>
 						</div>
 						<div class="bbD">

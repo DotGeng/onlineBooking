@@ -8,4 +8,7 @@
   	DELETE FROM systemdata WHERE 
 	systemdata.systemDataID = #{systemdataId}
   </delete> -->
+  <delete id="deleteStudentInformation">
+  	DELETE from student
+  </delete>
 </mapper>

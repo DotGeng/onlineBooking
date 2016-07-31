@@ -71,4 +71,7 @@
     WHERE 
     studentbooking.studentBookingID=#{studentBookingId}
   </delete> -->
+  <delete id="clearUpStudentBooking" >
+  	TRUNCATE TABLE studentbooking 
+  </delete>
 </mapper>

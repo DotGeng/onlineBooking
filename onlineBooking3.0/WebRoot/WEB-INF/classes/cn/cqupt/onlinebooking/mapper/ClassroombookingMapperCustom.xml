@@ -74,4 +74,7 @@
   	SELECT student.examtimes,student.isCheated from student 
   	WHERE student.studentNO=#{studentNo}
   </select>
+  <delete id="clearUpStudentBooking">
+  	TRUNCATE studentbooking
+  </delete>
 </mapper>

@@ -13,6 +13,7 @@ import cn.cqupt.onlinebooking.po.PeriodCustome;
 import cn.cqupt.onlinebooking.po.ProctorCustome;
 import cn.cqupt.onlinebooking.po.SeatCustome;
 import cn.cqupt.onlinebooking.po.SeatQueryVo;
+import cn.cqupt.onlinebooking.po.StudentbookingCounted;
 import cn.cqupt.onlinebooking.po.TeacherCustom;
 import cn.cqupt.onlinebooking.service.ClassroomService;
 import cn.cqupt.onlinebooking.service.PeriodService;
@@ -168,6 +169,13 @@ public class ClassroomController {
 	//根据id删除员和考试信息
 	@RequestMapping("deleteProctorById")
 	public ModelAndView deleteProctorById(Integer examID) throws Exception {
+		//首先看下是否该监考老师下还有预约学生，如果有的话，请先清空。
+		int studentBookingCount = teacherService.getStudentBookingByExamId(examID);
+		if(studentBookingCount != 0) {
+			ModelAndView modelAndView = getProctorPage();
+			modelAndView.addObject("message1","请先清空该监考老师负责的预约信息");
+			return modelAndView;
+		}
 		classroomServcie.deleteProctorByExamID(examID);
 		ModelAndView modelAndView = getProctorPage();
 		return modelAndView;

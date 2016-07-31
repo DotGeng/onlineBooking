@@ -94,8 +94,8 @@ public class ClassroomServiceImpl implements ClassroomService {
 	public void deleteProctorByExamID(Integer examID) throws Exception {
 		proctorMapperCustome.deleteProctorByExamID(examID);
 	}
-	public List<ProctorCustome> getExamInformationNotRepeat() throws Exception {
-		List<ProctorCustome> proctorList = proctorMapperCustome.getProctorList();
+	public List<ProctorCustome> getExamInformationNotRepeat(Integer openBatch) throws Exception {
+		List<ProctorCustome> proctorList = proctorMapperCustome.getProctorList2(openBatch);
 		//机房的最大容量
 		List<ClassroombookingCount> classroombookingCountList = classroombookingMapperCustom.getClassroombookingCounts();
 		List<StudentbookingCounted> studentbookingCountedList = classroombookingMapperCustom.getStudentbookingCounted();
@@ -177,9 +177,13 @@ public class ClassroomServiceImpl implements ClassroomService {
 			classroombookingMapperCustom.updateNoTestToTest3(classroomId,teacherid, batch, week, period, wantToState);
 		}
 	}
+	
+	public void clearUpStudentBooking() throws Exception {
+		classroombookingMapperCustom.clearUpStudentBooking();
+	}
 	public List<StudentbookingCounted> getStudentbookingCounted()
 			throws Exception {
-		
+		// TODO Auto-generated method stub
 		return null;
 	}
 	public List<ClassroombookingCount> getClassroombookingCounts()

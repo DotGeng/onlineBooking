@@ -11,7 +11,15 @@
 <link rel="stylesheet" type="text/css" href="<%=path %>/style/css/css.css" />
 <script type="text/javascript" src="<%=path %>/style/js/jquery.min.js"></script>
 </head>
-
+<script type="text/javascript">
+	function message() {
+		var message1 = "${message1}";
+		if(message1 != null && message1 != "") {
+			alert(message1);
+		}
+	}
+	window.onload = message;
+</script>
 <body>
 	<div id="pageAll">
 		<div class="pageTop">
