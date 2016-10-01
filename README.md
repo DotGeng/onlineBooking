@@ -1,14 +1,15 @@
-1����ԤԼ����ϵͳ����B/S�ܹ�������tomcat���������ⰲװ������ά����������ѧ����ǰԤ�����ԣ���ʦ����ѧ�����������������ˡ�ϵͳ��Ҫ��Ϊ�����֣����ܹ���Ա��������ʦ������ѧ����������ģ�顣
+1在线预约考试系统采用B/S架构，采用tomcat服务器，免安装，易于维护。其满足学生提前预考考试，教师管理学生考试事务的相关事宜。系统主要分为三部分：超管管理员管理，教师管理，学生管理三个模块。
 
-��ϵͳʵ�ֵ���Ҫ���ܰ�����
-1����������Աģ��: ��ѧ����Ϣ����ʦ��Ϣ��ϵͳ��Ϣ���й�������ϵͳȨ�޽��й�����
-2��ѧ��ģ�飺�ṩѧ��ԤԼ���ܣ�ѧ��ǩ�����ܣ��鿴֪ͨ���ܡ��޸����빦�ܡ�
-3����ʦģ��:Ϊ��ʦ�ṩ��ѯѧ��ԤԼ��Ϣ����ӡѧ����ԤԼ��Ϣ��
+本系统实现的主要功能包括：
+1 该系统是为重庆邮电大学开发设计的一款学生自助式预约考试系统。
+2 学生在指定的时间段发起指定时间点的考试预约。系统为其分配考号，考场号，座位号。学生在指定的时间点，到学校机房登陆系统参加考试（如果不在机房登陆，那么学生就没有办法参加考试），由系统自动发卷（从题库中抽取），题库是管理员提前写入到系统中的。
+3 学生考试结束交卷后，系统为每一个同学记录试卷内容。
+4 老师批改后，可以上传学生成绩，学生登录系统可以查看成绩
 
-���л���
-����ԤԼ����ϵͳ�ǻ���B/S�ܹ�����������Windows2007+tomcat7.0+jdk1.7�����ϻ���linux+tomcat7.0+jdk1.+MySql5.5�������ϰ汾�������С�������������ϵqq��1029688258�����䣺yukungeng@gmail.com
+运行环境
+在线预约考试系统是基于B/S架构的软件，在Windows2007+tomcat7.0+jdk1.7及以上或者linux+tomcat7.0+jdk1.+MySql5.5及其以上版本均可运行。如有问题请联系qq：1029688258，邮箱：yukungeng@gmail.com
 
-4.1 ϵͳ�Ľ���
-��������Աģ�飺������http://IP:8080/onlineBooking3.0/managerLogin.jsp
-��ͨ��ʦģ�飺������http://IP:8080/onlineBooking3.0/teacherLogin.jsp
-ѧ��ģ�飺������http://IP:8080/onlineBooking3.0/studentLogin.jsp
+4.1 系统的进入
+超级管理员模块：请输入http://IP:8080/onlineBooking3.0/managerLogin.jsp
+普通教师模块：请输入http://IP:8080/onlineBooking3.0/teacherLogin.jsp
+学生模块：请输入http://IP:8080/onlineBooking3.0/studentLogin.jsp
